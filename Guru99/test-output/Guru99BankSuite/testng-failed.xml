@@ -6,48 +6,13 @@
   </listeners>
   <test thread-count="5" name="Guru99 Tests(failed)">
     <classes>
-      <class name="testcases.WithdrawalTest">
-        <methods>
-          <include name="setup"/>
-          <include name="tearDown"/>
-          <include name="withdrawalMoneyTest"/>
-        </methods>
-      </class> <!-- testcases.WithdrawalTest -->
       <class name="testcases.LoginTest">
         <methods>
           <include name="setup"/>
           <include name="tearDown"/>
-          <include name="invalidLoginTest"/>
+          <include name="emptyLoginTest"/>
         </methods>
       </class> <!-- testcases.LoginTest -->
-      <class name="testcases.FundTransferTest">
-        <methods>
-          <include name="setup"/>
-          <include name="tearDown"/>
-          <include name="fundTransferTest"/>
-        </methods>
-      </class> <!-- testcases.FundTransferTest -->
-      <class name="testcases.CustomerTest">
-        <methods>
-          <include name="setup"/>
-          <include name="tearDown"/>
-          <include name="createCustomerTest"/>
-        </methods>
-      </class> <!-- testcases.CustomerTest -->
-      <class name="testcases.DepositTest">
-        <methods>
-          <include name="setup"/>
-          <include name="tearDown"/>
-          <include name="depositMoneyTest"/>
-        </methods>
-      </class> <!-- testcases.DepositTest -->
-      <class name="testcases.AccountTest">
-        <methods>
-          <include name="setup"/>
-          <include name="tearDown"/>
-          <include name="createAccountTest"/>
-        </methods>
-      </class> <!-- testcases.AccountTest -->
     </classes>
   </test> <!-- Guru99 Tests(failed) -->
 </suite> <!-- Failed suite [Guru99BankSuite] -->

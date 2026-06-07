@@ -37,6 +37,20 @@ public class AccountTest extends BaseTest {
         account.createAccount(
                 TestData.customerId);
         
+        Assert.assertNotNull(
+                TestData.accountId1);
+
+        Assert.assertNotNull(
+                TestData.accountId2);
+
+        System.out.println(
+                "Account 1 = "
+                + TestData.accountId1);
+
+        System.out.println(
+                "Account 2 = "
+                + TestData.accountId2);
+        
         Assert.assertTrue(
                 driver.getPageSource()
                       .contains("Account Generated Successfully"));

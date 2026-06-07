@@ -7,6 +7,7 @@ import base.BaseTest;
 import pages.LoginPage;
 import pages.NewCustomerPage;
 import utilities.ConfigReader;
+import utilities.TestData;
 import utilities.WaitUtils;
 
 public class CustomerTest extends BaseTest {
@@ -36,5 +37,13 @@ public class CustomerTest extends BaseTest {
                 driver.getPageSource()
                       .contains(
                               "Customer Registered Successfully"));
+   
+        System.out.println(
+                "Customer ID = "
+                + TestData.customerId);
+
+        Assert.assertNotNull(
+                TestData.customerId);
+        
     }
 }

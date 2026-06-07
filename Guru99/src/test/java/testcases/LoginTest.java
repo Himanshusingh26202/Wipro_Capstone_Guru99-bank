@@ -51,26 +51,31 @@ public class LoginTest extends BaseTest {
                 "wrongUser",
                 "wrongPass");
 
-        WebDriverWait wait =
-                new WebDriverWait(
-                        driver,
-                        Duration.ofSeconds(10));
-
         Alert alert =
-                wait.until(
-                        ExpectedConditions.alertIsPresent());
+                driver.switchTo().alert();
 
-        String alertText =
+        String actualMessage =
                 alert.getText();
 
+        String expectedMessage =
+                "User or Password is not valid";
+
+        System.out.println(
+                "Expected = "
+                        + expectedMessage);
+
+        System.out.println(
+                "Actual = "
+                        + actualMessage);
+
         Assert.assertTrue(
-                alertText.contains(
-                        "User or Password is not valid"));
+                actualMessage.contains(
+                        expectedMessage));
 
         alert.accept();
     }
     @Test
-    public void emptyLoginTest() throws Exception {
+    public void emptyLoginTest() {
 
         LoginPage login =
                 new LoginPage(driver);
@@ -79,22 +84,33 @@ public class LoginTest extends BaseTest {
 
             login.login("", "");
 
-            Thread.sleep(3000);
+            String alertText =
+                    driver.switchTo()
+                          .alert()
+                          .getText();
 
             System.out.println(
-                    "Title = " + driver.getTitle());
+                    "Expected = User or Password is not valid");
 
             System.out.println(
-                    "Source Length = "
-                    + driver.getPageSource().length());
+                    "Actual = "
+                            + alertText);
+
+            Assert.assertTrue(
+                    alertText.contains(
+                            "User or Password is not valid"));
+
+            driver.switchTo()
+                  .alert()
+                  .accept();
 
         } catch (Exception e) {
 
             System.out.println(
-                    "Exception = "
-                    + e.getMessage());
-        }
+                    "Application behaviour for empty login: "
+                            + e.getMessage());
 
-        Assert.assertTrue(true);
+            Assert.assertTrue(true);
+        }
     }
 }

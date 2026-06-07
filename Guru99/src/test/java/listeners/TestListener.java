@@ -6,44 +6,67 @@ import org.testng.ITestResult;
 
 import utilities.ScreenshotUtil;
 import base.BaseTest;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+
+import utilities.ExtentManager;
 
 public class TestListener implements ITestListener {
 
-    @Override
-    public void onTestStart(ITestResult result) {
+	private static ExtentReports extent =
+	        ExtentManager.getInstance();
 
-        System.out.println(
-                "STARTED : "
-                        + result.getName()); 
-    }
+	private static ExtentTest test;
+	@Override
+	public void onTestStart(
+	        ITestResult result) {
 
-    @Override
-    public void onTestSuccess(ITestResult result) {
+	    test =
+	            extent.createTest(
+	                    result.getName());
 
-        System.out.println(
-                "PASSED : "
-                        + result.getName());
-    }
+	    System.out.println(
+	            "STARTED : "
+	                    + result.getName());
+	}
 
-    @Override
-    public void onTestFailure(ITestResult result) {
+	@Override
+	public void onTestSuccess(
+	        ITestResult result) {
 
-        System.out.println(
-                "FAILED : "
-                        + result.getName());
+	    test.pass("Test Passed");
 
-        ScreenshotUtil.captureScreenshot(
-                BaseTest.driver,
-                result.getName());
-    }
+	    System.out.println(
+	            "VALIDATION PASSED : "
+	                    + result.getName());
+	}
 
-    @Override
-    public void onTestSkipped(ITestResult result) {
+	@Override
+	public void onTestFailure(
+	        ITestResult result) {
 
-        System.out.println(
-                "SKIPPED : "
-                        + result.getName());
-    }
+	    test.fail(
+	            result.getThrowable());
+
+	    ScreenshotUtil.captureScreenshot(
+	            BaseTest.driver,
+	            result.getName());
+
+	    System.out.println(
+	            "VALIDATION FAILED : "
+	                    + result.getName());
+	}
+
+	@Override
+	public void onTestSkipped(
+	        ITestResult result) {
+
+	    test.skip("Test Skipped");
+
+	    System.out.println(
+	            "SKIPPED : "
+	                    + result.getName());
+	}
 
     @Override
     public void onStart(ITestContext context) {
@@ -53,7 +76,10 @@ public class TestListener implements ITestListener {
     }
 
     @Override
-    public void onFinish(ITestContext context) {
+    public void onFinish(
+            ITestContext context) {
+
+        extent.flush();
 
         System.out.println(
                 "Execution Completed");
