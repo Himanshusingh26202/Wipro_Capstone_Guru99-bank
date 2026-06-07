@@ -10,7 +10,7 @@
         <methods>
           <include name="setup"/>
           <include name="tearDown"/>
-          <include name="emptyLoginTest"/>
+          <include name="invalidLoginTest"/>
         </methods>
       </class> <!-- testcases.LoginTest -->
     </classes>

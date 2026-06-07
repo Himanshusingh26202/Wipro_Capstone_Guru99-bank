@@ -51,8 +51,15 @@ public class LoginTest extends BaseTest {
                 "wrongUser",
                 "wrongPass");
 
+        WebDriverWait wait =
+                new WebDriverWait(
+                        driver,
+                        Duration.ofSeconds(10));
+
         Alert alert =
-                driver.switchTo().alert();
+                wait.until(
+                        ExpectedConditions
+                        .alertIsPresent());
 
         String actualMessage =
                 alert.getText();
