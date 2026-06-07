@@ -1,0 +1,76 @@
+pipeline {
+
+    agent any
+
+    tools {
+        maven 'Maven3'
+        jdk 'jdk21'
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+
+            steps {
+
+                git branch: 'main',
+                url: 'https://github.com/Himanshusingh26202/Wipro_Capstone_Guru99-bank.git'
+            }
+        }
+
+        stage('Build Project') {
+
+            steps {
+
+                dir('Guru99') {
+
+                    bat 'mvn clean compile'
+                }
+            }
+        }
+
+        stage('Execute Tests') {
+
+            steps {
+
+                dir('Guru99') {
+
+                    bat 'mvn test'
+                }
+            }
+        }
+
+        stage('Publish TestNG Results') {
+
+            steps {
+
+                dir('Guru99') {
+
+                    junit 'test-output/junitreports/*.xml'
+                }
+            }
+        }
+    }
+
+    post {
+
+        always {
+
+            archiveArtifacts artifacts: 'Guru99/screenshots/*.png',
+                             allowEmptyArchive: true
+
+            archiveArtifacts artifacts: 'Guru99/test-output/ExtentReport.html',
+                             allowEmptyArchive: true
+        }
+
+        success {
+
+            echo 'Guru99 Automation Execution Successful'
+        }
+
+        failure {
+
+            echo 'Guru99 Automation Execution Failed'
+        }
+    }
+}
