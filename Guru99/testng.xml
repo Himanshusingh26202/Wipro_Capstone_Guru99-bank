@@ -4,33 +4,34 @@
 <suite name="Guru99BankSuite">
 
     <listeners>
-
-        <listener class-name=
-        "listeners.TestListener"/>
-
+        <listener class-name="listeners.TestListener"/>
     </listeners>
 
     <test name="Guru99 Tests">
 
         <classes>
 
-            <class name=
-            "testcases.LoginTest"/>
+            <!-- Login Module -->
+            <class name="testcases.LoginTest"/>
 
-            <class name=
-            "testcases.CustomerTest"/>
+            <!-- Customer Module -->
+            <class name="testcases.CustomerTest"/>
+            <class name="testcases.CustomerValidationTest"/>
 
-            <class name=
-            "testcases.AccountTest"/>
+            <!-- Account Module -->
+            <class name="testcases.AccountTest"/>
+            <class name="testcases.AccountDetailsTest"/>
 
-            <class name=
-            "testcases.DepositTest"/>
+            <!-- Transaction Module -->
+            <class name="testcases.DepositTest"/>
+            <class name="testcases.WithdrawalTest"/>
 
-            <class name=
-            "testcases.WithdrawalTest"/>
+            <!-- Fund Transfer Module -->
+            <class name="testcases.FundTransferTest"/>
 
-            <class name=
-            "testcases.FundTransferTest"/>
+            <!-- Negative Test Scenarios -->
+            <class name="testcases.InvalidAccountTest"/>
+            <class name="testcases.InsufficientBalanceTest"/>
 
         </classes>
 

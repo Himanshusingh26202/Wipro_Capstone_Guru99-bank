@@ -51,6 +51,14 @@ public class AccountTest extends BaseTest {
                 "Account 2 = "
                 + TestData.accountId2);
         
+        System.out.println(
+                "Initial Deposit Account 1 = "
+                + TestData.account1Balance);
+
+        System.out.println(
+                "Initial Deposit Account 2 = "
+                + TestData.account2Balance);
+        
         Assert.assertTrue(
                 driver.getPageSource()
                       .contains("Account Generated Successfully"));

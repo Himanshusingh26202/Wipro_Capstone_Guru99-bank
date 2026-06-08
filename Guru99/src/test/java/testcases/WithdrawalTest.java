@@ -32,6 +32,16 @@ public class WithdrawalTest extends BaseTest {
                 TestData.accountId1,
                 "500");
         
+        TestData.account1Balance =
+                TestData.account1Balance - 500;
+
+        System.out.println(
+                "Withdrawal Amount = 500");
+
+        System.out.println(
+                "Current Account Balance = "
+                        + TestData.account1Balance);
+        
         WaitUtils.waitForText(
                 driver,
                 "Transaction details of Withdrawal");

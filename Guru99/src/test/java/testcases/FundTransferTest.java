@@ -44,6 +44,22 @@ public class FundTransferTest
                 TestData.accountId2,
                 "200");
         
+        TestData.account1Balance =
+                TestData.account1Balance - 200;
+
+        TestData.account2Balance =
+                TestData.account2Balance + 200;
+
+        System.out.println(
+                "Transfer Amount = 200");
+
+        System.out.println(
+                "Sender Balance = "
+                        + TestData.account1Balance);
+
+        System.out.println(
+                "Receiver Balance = "
+                        + TestData.account2Balance);
         
         WaitUtils.waitForText(
                 driver,
