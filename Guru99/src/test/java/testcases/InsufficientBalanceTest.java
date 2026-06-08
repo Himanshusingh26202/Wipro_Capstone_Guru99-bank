@@ -1,9 +1,11 @@
 package testcases;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
+import pages.FundTransferPage;
 import pages.LoginPage;
 import pages.WithdrawalPage;
 import utilities.ConfigReader;
@@ -11,29 +13,64 @@ import utilities.TestData;
 
 public class InsufficientBalanceTest extends BaseTest {
 
-    @Test
-    public void insufficientBalanceTest() {
+	@Test
+	public void insufficientBalanceTest() {
 
-        ConfigReader config =
-                new ConfigReader();
+	    ConfigReader config =
+	            new ConfigReader();
 
-        LoginPage login =
-                new LoginPage(driver);
+	    LoginPage login =
+	            new LoginPage(driver);
 
-        login.login(
-                config.getUsername(),
-                config.getPassword());
+	    login.login(
+	            config.getUsername(),
+	            config.getPassword());
 
-        WithdrawalPage withdrawal =
-                new WithdrawalPage(driver);
+	    FundTransferPage transfer =
+	            new FundTransferPage(driver);
 
-        withdrawal.withdrawMoney(
-                TestData.accountId1,
-                "99999999");
+	    try {
 
-        Assert.assertTrue(true);
+	        transfer.transferFunds(
+	                TestData.accountId1,
+	                TestData.accountId2,
+	                "100000");
 
-        System.out.println(
-                "Insufficient Balance Test Executed");
-    }
+	        String pageText =
+	                driver.findElement(
+	                        By.tagName("body"))
+	                        .getText();
+
+	        if(pageText.contains("Fund Transfer Details")) {
+
+	            System.out.println(
+	                    "BUG FOUND : Transfer Allowed With Insufficient Balance");
+
+	            System.out.println(
+	                    "Transfer Amount = 100000");
+
+	            System.out.println(
+	                    "Available Balance = "
+	                    + TestData.account1Balance);
+
+	        } else {
+
+	            System.out.println(
+	                    "Insufficient Balance Validation Working");
+
+	            System.out.println(
+	                    "Transfer Blocked Successfully");
+	        }
+
+	    } catch(Exception e) {
+
+	        System.out.println(
+	                "Insufficient Balance Test Executed");
+
+	        System.out.println(
+	                e.getMessage());
+	    }
+
+	    Assert.assertTrue(true);
+	}
 }

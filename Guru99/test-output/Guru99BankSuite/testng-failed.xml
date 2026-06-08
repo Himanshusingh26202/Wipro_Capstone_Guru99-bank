@@ -6,13 +6,13 @@
   </listeners>
   <test thread-count="5" name="Guru99 Tests(failed)">
     <classes>
-      <class name="testcases.LoginTest">
+      <class name="testcases.InsufficientBalanceTest">
         <methods>
           <include name="setup"/>
           <include name="tearDown"/>
-          <include name="invalidLoginTest"/>
+          <include name="insufficientBalanceTest"/>
         </methods>
-      </class> <!-- testcases.LoginTest -->
+      </class> <!-- testcases.InsufficientBalanceTest -->
     </classes>
   </test> <!-- Guru99 Tests(failed) -->
 </suite> <!-- Failed suite [Guru99BankSuite] -->
