@@ -29,13 +29,24 @@ pipeline {
             }
         }
 
-        stage('Execute Tests') {
+        stage('Build Docker Image') {
 
             steps {
 
                 dir('Guru99') {
 
-                    bat 'mvn test'
+                    bat 'docker build -t guru99-bank .'
+                }
+            }
+        }
+
+        stage('Run Tests in Docker') {
+
+            steps {
+
+                dir('Guru99') {
+
+                    bat 'docker run --rm guru99-bank'
                 }
             }
         }
@@ -56,21 +67,25 @@ pipeline {
 
         always {
 
-            archiveArtifacts artifacts: 'Guru99/screenshots/*.png',
-                             allowEmptyArchive: true
+            archiveArtifacts(
+                artifacts: 'Guru99/screenshots/*.png',
+                allowEmptyArchive: true
+            )
 
-            archiveArtifacts artifacts: 'Guru99/test-output/ExtentReport.html',
-                             allowEmptyArchive: true
+            archiveArtifacts(
+                artifacts: 'Guru99/test-output/ExtentReport.html',
+                allowEmptyArchive: true
+            )
         }
 
         success {
 
-            echo 'Guru99 Automation Execution Successful'
+            echo 'Guru99 Automation + Docker Execution Successful'
         }
 
         failure {
 
-            echo 'Guru99 Automation Execution Failed'
+            echo 'Guru99 Automation + Docker Execution Failed'
         }
     }
 }
